@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TrailNest | Interactive Hiking Adventures</title>
+  <meta name="description" content="TrailNest: a static website enhanced with plain JavaScript interactivity.">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#top">Trail<span>Nest</span></a>
+      <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="#trails">Trails</a></li>
+          <li><a href="#why">Why Us</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#join" class="btn btn-small">Join</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button type="button" id="theme-toggle" class="icon-btn" aria-label="Switch to dark mode" title="Toggle dark mode">
+          <span aria-hidden="true">&#9790;</span>
+        </button>
+        <button type="button" id="menu-btn" class="icon-btn menu-btn" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu">
+          <span class="bars" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="hero" id="top">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <p class="eyebrow">Guided hiking trips</p>
+          <h1>Find your next trail, <span id="typed-word">your way.</span></h1>
+          <p class="lead">Filter routes by difficulty, search by name and sign up for updates, all on one interactive page.</p>
+          <div class="btn-group">
+            <a href="#trails" class="btn">Explore Trails</a>
+            <a href="#join" class="btn btn-outline">Get Updates</a>
+          </div>
+        </div>
+        <picture>
+          <source media="(min-width: 900px)" srcset="images/hero-square.svg">
+          <img src="images/hero-wide.svg" alt="Illustration of mountains at sunrise" width="1600" height="700">
+        </picture>
+      </div>
+    </section>
+
+    <section id="trails" class="section">
+      <div class="container">
+        <h2>Popular Trails</h2>
+
+        <div class="toolbar">
+          <div class="filters" role="group" aria-label="Filter trails by difficulty">
+            <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" class="chip" data-filter="easy" aria-pressed="false">Easy</button>
+            <button type="button" class="chip" data-filter="moderate" aria-pressed="false">Moderate</button>
+            <button type="button" class="chip" data-filter="hard" aria-pressed="false">Hard</button>
+          </div>
+          <label for="trail-search" class="visually-hidden">Search trails</label>
+          <input type="search" id="trail-search" class="search" placeholder="Search trails..." autocomplete="off">
+        </div>
+        <p id="result-count" class="result-count" aria-live="polite"></p>
+
+        <div class="grid grid-auto" id="trail-grid">
+          <article class="card reveal" data-difficulty="easy">
+            <img src="images/trail-forest.svg" alt="Forest trail illustration" loading="lazy" width="640" height="480">
+            <div class="card-body"><h3>Pine Ridge Loop</h3><p>A shaded forest walk with gentle climbs and wildlife spotting.</p><p class="meta">8 km &middot; Easy</p></div>
+          </article>
+          <article class="card reveal" data-difficulty="moderate">
+            <img src="images/trail-lake.svg" alt="Lake trail illustration" loading="lazy" width="640" height="480">
+            <div class="card-body"><h3>Blue Lake Circuit</h3><p>Crystal-clear water, picnic spots and wide mountain views.</p><p class="meta">12 km &middot; Moderate</p></div>
+          </article>
+          <article class="card reveal" data-difficulty="hard">
+            <img src="images/trail-desert.svg" alt="Desert trail illustration" loading="lazy" width="640" height="480">
+            <div class="card-body"><h3>Red Mesa Climb</h3><p>A steep sunrise hike across warm sandstone ridges.</p><p class="meta">15 km &middot; Hard</p></div>
+          </article>
+          <article class="card reveal" data-difficulty="easy">
+            <img src="images/trail-lake.svg" alt="Valley trail illustration" loading="lazy" width="640" height="480">
+            <div class="card-body"><h3>Misty Valley Walk</h3><p>A relaxed morning stroll through low clouds and meadows.</p><p class="meta">5 km &middot; Easy</p></div>
+          </article>
+          <article class="card reveal" data-difficulty="moderate">
+            <img src="images/trail-forest.svg" alt="Waterfall trail illustration" loading="lazy" width="640" height="480">
+            <div class="card-body"><h3>Cedar Falls Trail</h3><p>Follow a stream through cedar woods to a hidden waterfall.</p><p class="meta">10 km &middot; Moderate</p></div>
+          </article>
+          <article class="card reveal" data-difficulty="hard">
+            <img src="images/trail-desert.svg" alt="Summit trail illustration" loading="lazy" width="640" height="480">
+            <div class="card-body"><h3>Eagle Peak Summit</h3><p>A demanding full-day ascent with exposed ridges and 360 degree views.</p><p class="meta">18 km &middot; Hard</p></div>
+          </article>
+        </div>
+        <p id="empty-msg" class="empty-msg" hidden>No trails match your search. Try another word or filter.</p>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="TrailNest in numbers">
+      <div class="container grid grid-stats">
+        <div><strong data-count="120" data-suffix="+">120+</strong><span>Trails</span></div>
+        <div><strong data-count="45">45</strong><span>Local guides</span></div>
+        <div><strong data-count="9" data-suffix="k">9k</strong><span>Happy hikers</span></div>
+        <div><strong data-count="4.9" data-decimals="1">4.9</strong><span>Average rating</span></div>
+      </div>
+    </section>
+
+    <section id="why" class="section">
+      <div class="container split">
+        <img src="images/about.svg" alt="Mountain landscape with a bright sun" loading="lazy" width="900" height="600">
+        <div class="reveal">
+          <h2>Why hike with us</h2>
+          <p>Every route is scouted and rated by our guides, so you know what to expect before you set off.</p>
+          <ul class="checklist">
+            <li>Small groups, never more than 10</li>
+            <li>Certified local guides</li>
+            <li>Flexible booking and free rescheduling</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section section-alt">
+      <div class="container narrow">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq">
+          <div class="faq-item">
+            <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-1" id="faq-btn-1">Do I need hiking experience?</button></h3>
+            <div class="faq-a" id="faq-1" role="region" aria-labelledby="faq-btn-1" hidden><p>No. Easy trails are beginner friendly, and every group has a certified guide.</p></div>
+          </div>
+          <div class="faq-item">
+            <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-2" id="faq-btn-2">What should I bring?</button></h3>
+            <div class="faq-a" id="faq-2" role="region" aria-labelledby="faq-btn-2" hidden><p>Sturdy shoes, water, a light jacket and sun protection. We send a full checklist after booking.</p></div>
+          </div>
+          <div class="faq-item">
+            <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-3" id="faq-btn-3">Can I reschedule my trip?</button></h3>
+            <div class="faq-a" id="faq-3" role="region" aria-labelledby="faq-btn-3" hidden><p>Yes. You can move your booking for free up to 48 hours before departure.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="join" class="section">
+      <div class="container narrow">
+        <h2>Get trail updates</h2>
+        <form class="signup" id="signup-form" action="#" method="post" novalidate>
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" autocomplete="name" aria-describedby="name-error">
+            <p class="error" id="name-error" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" aria-describedby="email-error">
+            <p class="error" id="email-error" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="message">Message <span class="counter" id="msg-counter">0 / 200</span></label>
+            <textarea id="message" name="message" rows="3" maxlength="200" placeholder="Tell us what you are looking for (optional)"></textarea>
+          </div>
+          <button type="submit" class="btn">Subscribe</button>
+          <p class="success" id="form-success" role="status" hidden></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container grid grid-footer">
+      <div><p class="logo">Trail<span>Nest</span></p><p>Guided hikes for everyone.</p></div>
+      <nav aria-label="Trails footer"><h3>Trails</h3><ul><li><a href="#trails">Easy</a></li><li><a href="#trails">Moderate</a></li><li><a href="#trails">Hard</a></li></ul></nav>
+      <nav aria-label="Company footer"><h3>Company</h3><ul><li><a href="#why">About</a></li><li><a href="#faq">FAQ</a></li><li><a href="#join">Contact</a></li></ul></nav>
+      <div><h3>Contact</h3><p>hello@trailnest.example</p></div>
+    </div>
+    <p class="copyright">&copy; 2026 TrailNest. All rights reserved.</p>
+  </footer>
+
+  <button type="button" id="back-to-top" class="to-top" aria-label="Back to top" hidden>&uarr;</button>
+
+</body>
+</html>
